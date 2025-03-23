@@ -2,5 +2,33 @@ import * as vscode from 'vscode';
 
 export function initializeAwaitRule(context: vscode.ExtensionContext) {
 	console.log('初始化 .await 規則');
-	// ...未來可以在這裡擴展 .await 規則的邏輯...
+
+	// 註冊當輸入 .await 時的建議
+	const awaitCompletionProvider = vscode.languages.registerCompletionItemProvider(
+		{ language: 'csharp' },
+		{
+			provideCompletionItems(document, position) {
+				const awaitSnippet = new vscode.CompletionItem('await', vscode.CompletionItemKind.Snippet);
+				awaitSnippet.command = {
+					command: 'extension.generateAwaitSnippet',
+					title: '產生 await 語句',
+					arguments: [document, position]
+				};
+				awaitSnippet.detail = '產生 await 語句';
+				awaitSnippet.documentation = '快速產生 C# 的 await 語句';
+				return [awaitSnippet];
+			}
+		},
+		'.await'
+	);
+
+	// 註冊命令來處理程式碼產生邏輯
+	const generateAwaitSnippetCommand = vscode.commands.registerCommand('extension.generateAwaitSnippet', (document, position) => {
+		const editor = vscode.window.activeTextEditor;
+		if (editor) {
+			// ...existing code...
+		}
+	});
+
+	context.subscriptions.push(awaitCompletionProvider, generateAwaitSnippetCommand);
 }

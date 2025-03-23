@@ -9,16 +9,33 @@ export function initializeIfRule(context: vscode.ExtensionContext) {
 		{
 			provideCompletionItems(document, position) {
 				// 建立 .if 的建議項目
-				const ifSnippet = new vscode.CompletionItem('.if', vscode.CompletionItemKind.Snippet);
-				ifSnippet.insertText = new vscode.SnippetString('if (${1:condition}) {\n\t$0\n}');
+				const ifSnippet = new vscode.CompletionItem('if', vscode.CompletionItemKind.Snippet);
+
+				// 當選擇 .if 時才執行程式碼產生邏輯
+				ifSnippet.command = {
+					command: 'extension.generateIfSnippet',
+					title: '產生 if 條件語句',
+					arguments: [document, position]
+				};
+
 				ifSnippet.detail = '產生 if 條件語句';
-				ifSnippet.documentation = '快速產生 C# 的 if 條件語句';
+				ifSnippet.documentation = '快速產生 C# 的 if 條件語句，僅限於 method 的內容範圍內';
 
 				return [ifSnippet];
 			}
 		},
-		'.' // 觸發建議的字元
+		'.if' // 觸發建議的字元
 	);
 
-	context.subscriptions.push(ifCompletionProvider);
+	// 註冊命令來處理程式碼產生邏輯
+	const generateIfSnippetCommand = vscode.commands.registerCommand('extension.generateIfSnippet', (document, position) => {
+		const editor = vscode.window.activeTextEditor;
+		if (editor) {
+			// do something.
+		}
+	});
+
+
+
+	context.subscriptions.push(ifCompletionProvider, generateIfSnippetCommand);
 }
