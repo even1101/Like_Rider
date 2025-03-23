@@ -5,35 +5,23 @@ import { initializeReturnRule } from './rules/returnRule';
 import { initializeAwaitRule } from './rules/awaitRule';
 import { initializeIfRule } from './rules/ifRule';
 
-// This method is called when your extension is activated
-// Your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
 	
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "like-rider" is now active!');
-
-	// 處理已開啟的文件
 	vscode.workspace.textDocuments.forEach((document) => {
-		if (document.languageId === 'csharp') {
-			console.log('檔案為 .cs 副檔名，啟用初始化邏輯');
-			// 初始化邏輯規則
-			initializeVarRule(context);
-			initializeReturnRule(context);
-			initializeAwaitRule(context);
-			initializeIfRule(context);
 
-
-
-		
-			// 自動執行初始化程式碼
-			vscode.window.showInformationMessage('Like Rider 已啟用並執行初始化程式碼！');
-		} else {
-			console.log('檔案非 .cs 副檔名，跳過初始化');
+		if (document.languageId !== 'csharp') {
+			return;
 		}
+
+		// init rule
+		initializeVarRule(context);
+		initializeReturnRule(context);
+		initializeAwaitRule(context);
+		initializeIfRule(context);
+
+		vscode.window.showInformationMessage('Like Rider Initialize success');
 	});
 
 }
 
-// This method is called when your extension is deactivated
 export function deactivate() {}
