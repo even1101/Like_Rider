@@ -1,4 +1,5 @@
 import * as vscode from 'vscode';
+import { generateReturnSnippetCommand } from '../Commands/returnCommand';
 
 export function initializeReturnRule(context: vscode.ExtensionContext) {
 	console.log('初始化 .return 規則');
@@ -23,12 +24,5 @@ export function initializeReturnRule(context: vscode.ExtensionContext) {
 	);
 
 	// 註冊命令來處理程式碼產生邏輯
-	const generateReturnSnippetCommand = vscode.commands.registerCommand('extension.generateReturnSnippet', (document, position) => {
-		const editor = vscode.window.activeTextEditor;
-		if (editor) {
-			// ...existing code...
-		}
-	});
-
 	context.subscriptions.push(returnCompletionProvider, generateReturnSnippetCommand);
 }

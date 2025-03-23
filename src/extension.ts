@@ -23,6 +23,9 @@ export function activate(context: vscode.ExtensionContext) {
 			initializeAwaitRule(context);
 			initializeIfRule(context);
 
+
+
+		
 			// 自動執行初始化程式碼
 			vscode.window.showInformationMessage('Like Rider 已啟用並執行初始化程式碼！');
 		} else {

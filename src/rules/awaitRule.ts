@@ -1,4 +1,5 @@
 import * as vscode from 'vscode';
+import { generateAwaitSnippetCommand } from '../Commands/awaitCommand';
 
 export function initializeAwaitRule(context: vscode.ExtensionContext) {
 	console.log('初始化 .await 規則');
@@ -23,12 +24,5 @@ export function initializeAwaitRule(context: vscode.ExtensionContext) {
 	);
 
 	// 註冊命令來處理程式碼產生邏輯
-	const generateAwaitSnippetCommand = vscode.commands.registerCommand('extension.generateAwaitSnippet', (document, position) => {
-		const editor = vscode.window.activeTextEditor;
-		if (editor) {
-			// ...existing code...
-		}
-	});
-
 	context.subscriptions.push(awaitCompletionProvider, generateAwaitSnippetCommand);
 }

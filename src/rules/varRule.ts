@@ -1,4 +1,5 @@
 import * as vscode from 'vscode';
+import { generateVarSnippetCommand } from '../Commands/varCommand';
 
 export function initializeVarRule(context: vscode.ExtensionContext) {
 	console.log('初始化 .var 規則');
@@ -21,14 +22,6 @@ export function initializeVarRule(context: vscode.ExtensionContext) {
 		},
 		'.var'
 	);
-
-	// 註冊命令來處理程式碼產生邏輯
-	const generateVarSnippetCommand = vscode.commands.registerCommand('extension.generateVarSnippet', (document, position) => {
-		const editor = vscode.window.activeTextEditor;
-		if (editor) {
-			// ...existing code...
-		}
-	});
 
 	context.subscriptions.push(varCompletionProvider, generateVarSnippetCommand);
 }

@@ -1,4 +1,5 @@
 import * as vscode from 'vscode';
+import { generateIfSnippetCommand } from '../Commands/ifCommand';
 
 export function initializeIfRule(context: vscode.ExtensionContext) {
 	console.log('初始化 .if 規則');
@@ -28,14 +29,5 @@ export function initializeIfRule(context: vscode.ExtensionContext) {
 	);
 
 	// 註冊命令來處理程式碼產生邏輯
-	const generateIfSnippetCommand = vscode.commands.registerCommand('extension.generateIfSnippet', (document, position) => {
-		const editor = vscode.window.activeTextEditor;
-		if (editor) {
-			// do something.
-		}
-	});
-
-
-
 	context.subscriptions.push(ifCompletionProvider, generateIfSnippetCommand);
 }
