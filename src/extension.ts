@@ -14,10 +14,9 @@ export function activate(context: vscode.ExtensionContext) {
 	// This line of code will only be executed once when your extension is activated
 	console.log('Congratulations, your extension "like-rider" is now active!');
 
-	// 監聽編輯器中開啟的檔案
-	vscode.workspace.onDidOpenTextDocument((document) => {
+	// 處理已開啟的文件
+	vscode.workspace.textDocuments.forEach((document) => {
 		if (document.languageId === 'csharp') {
-			
 			console.log('檔案為 .cs 副檔名，啟用初始化邏輯');
 			// 初始化邏輯規則
 			initializeVarRule(context);
@@ -31,7 +30,7 @@ export function activate(context: vscode.ExtensionContext) {
 			console.log('檔案非 .cs 副檔名，跳過初始化');
 		}
 	});
-	// context.subscriptions.push(l);
+
 }
 
 // This method is called when your extension is deactivated
