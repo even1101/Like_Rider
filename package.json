@@ -31,6 +31,10 @@
     "lint": "eslint src",
     "test": "vscode-test"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/even1101/Like_Rider.git"
+  },
   "devDependencies": {
     "@types/vscode": "^1.98.0",
     "@types/mocha": "^10.0.10",
