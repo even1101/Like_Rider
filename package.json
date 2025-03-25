@@ -3,6 +3,8 @@
   "displayName": "Like Rider",
   "description": "Smart auto-completion for `var`, `await`, `if`, and `return` in C#.",
   "version": "0.0.1",
+  "publisher": "like-rider",
+
   "engines": {
     "vscode": "^1.98.0"
   },
