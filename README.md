@@ -1,71 +1,60 @@
-# like-rider README
+# Like Rider
 
-This is the README for your extension "like-rider". After writing up a brief description, we recommend including the following sections.
+[![en](https://img.shields.io/badge/lang-en-red.svg)](README.md)  
+[![zh-tw](https://img.shields.io/badge/lang-zh--tw-blue.svg)](README.zh-tw.md)
+
+Like Rider is a Visual Studio Code extension designed for C# developers, providing intelligent auto-completion and quick tools to help you write code faster.
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+### Implemented Features
 
-For example if there is an image subfolder under your extension project workspace:
+- **Intelligent Auto-Completion**
+  - `.ifA`: Generates a single-line `if` conditional block.
+  - `.varA`: Generates a single-line variable declaration.
+  - `.returnA`: Generates a single-line `return` statement.
 
-\!\[feature X\]\(images/feature-x.png\)
+- **Quick Tools**
+  - `@nguid`: Generates a GUID (with or without dashes).
+  - `@ndate`: Generates a date or timestamp in various formats.
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+### Unimplemented Features
 
-## Requirements
+- `.var`: Intended to generate a variable declaration.
+- `.await`: Intended to generate an asynchronous `await` statement.
+- `.if`: Intended to generate a multi-line `if` conditional block.
+- `.return`: Intended to generate a multi-line `return` statement.
+- `.task`: Intended to generate a Task method.
+- `.async`: Intended to generate an Async method.
+- `.awaitA`: Intended to generate a single-line `await` statement.
+- `.taskA`: Intended to generate a single-line Task method.
+- `.asyncA`: Intended to generate a single-line Async method.
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
 
-## Extension Settings
+## License
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+This project is licensed under the MIT License. See the full license text below:
 
-For example:
+```
+MIT License
 
-This extension contributes the following settings:
+Copyright (c) 2023
 
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-## Known Issues
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
-
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
----
-
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
