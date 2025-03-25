@@ -2,32 +2,32 @@ import * as vscode from 'vscode';
 import { generateIfSnippetCommand } from '../../Commands/if/ifCommand';
 
 export function initializeIfRule(context: vscode.ExtensionContext) {
-	console.log('初始化 .if 規則');
+	console.log('Initialize .if rule');
 
-	// 註冊當輸入 .if 時的建議
+	// Register suggestions when typing .if
 	const ifCompletionProvider = vscode.languages.registerCompletionItemProvider(
-		{ language: 'csharp' }, // 只在 C# 檔案中啟用
+		{ language: 'csharp' }, // Enable only in C# files
 		{
 			provideCompletionItems(document, position) {
-				// 建立 .if 的建議項目
+				// Create suggestion item for .if
 				const ifSnippet = new vscode.CompletionItem('if', vscode.CompletionItemKind.Snippet);
 
-				// 當選擇 .if 時才執行程式碼產生邏輯
+				// Execute code generation logic when .if is selected
 				ifSnippet.command = {
 					command: 'extension.generateIfSnippet',
-					title: '產生 if 條件語句',
+					title: 'Generate if conditional statement',
 					arguments: [document, position]
 				};
 
-				ifSnippet.detail = '產生 if 條件語句';
-				ifSnippet.documentation = '快速產生 C# 的 if 條件語句，僅限於 method 的內容範圍內';
+				ifSnippet.detail = 'Generate if conditional statement';
+				ifSnippet.documentation = 'Quickly generate C# if conditional statement, limited to method scope';
 
 				return [ifSnippet];
 			}
 		},
-		'.if' // 觸發建議的字元
+		'.if' // Trigger suggestion with this character
 	);
 
-	// 註冊命令來處理程式碼產生邏輯
+	// Register command to handle code generation logic
 	context.subscriptions.push(ifCompletionProvider, generateIfSnippetCommand);
 }

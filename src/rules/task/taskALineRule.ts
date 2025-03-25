@@ -2,24 +2,23 @@ import * as vscode from 'vscode';
 import { generateTaskALineSnippetCommand } from '../../Commands/task/taskALineCommand';
 
 export function initializeTaskALineRule(context: vscode.ExtensionContext) {
-	console.log('初始化 .taskALine 規則');
-
+	// Register suggestions when typing .taskA
 	const taskALineCompletionProvider = vscode.languages.registerCompletionItemProvider(
 		{ language: 'csharp' },
 		{
 			provideCompletionItems(document, position) {
-				const taskALineSnippet = new vscode.CompletionItem('taskALine', vscode.CompletionItemKind.Snippet);
+				const taskALineSnippet = new vscode.CompletionItem('taskA', vscode.CompletionItemKind.Snippet);
 				taskALineSnippet.command = {
 					command: 'extension.generateTaskALineSnippet',
-					title: '產生 taskALine 方法',
+					title: 'Generate taskA method',
 					arguments: [document, position]
 				};
-				taskALineSnippet.detail = '產生 taskALine 方法';
-				taskALineSnippet.documentation = '快速產生 C# 的 taskALine 方法';
+				taskALineSnippet.detail = 'Generate taskA method';
+				taskALineSnippet.documentation = 'Quickly generate C# taskA method';
 				return [taskALineSnippet];
 			}
 		},
-		'.taskALine'
+		'.taskA'
 	);
 
 	context.subscriptions.push(taskALineCompletionProvider, generateTaskALineSnippetCommand);

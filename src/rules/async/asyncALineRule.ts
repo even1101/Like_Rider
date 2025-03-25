@@ -2,13 +2,12 @@ import * as vscode from 'vscode';
 import { generateAsyncALineSnippetCommand } from '../../Commands/async/asyncALineCommand';
 
 export function initializeAsyncALineRule(context: vscode.ExtensionContext) {
-	console.log('初始化 .asyncALine 規則');
 
 	const asyncALineCompletionProvider = vscode.languages.registerCompletionItemProvider(
 		{ language: 'csharp' },
 		{
 			provideCompletionItems(document, position) {
-				const asyncALineSnippet = new vscode.CompletionItem('asyncALine', vscode.CompletionItemKind.Snippet);
+				const asyncALineSnippet = new vscode.CompletionItem('asyncA', vscode.CompletionItemKind.Snippet);
 				asyncALineSnippet.command = {
 					command: 'extension.generateAsyncALineSnippet',
 					title: '產生 async 方法',
@@ -19,7 +18,7 @@ export function initializeAsyncALineRule(context: vscode.ExtensionContext) {
 				return [asyncALineSnippet];
 			}
 		},
-		'.asynca'
+		'.asyncA'
 	);
 
 	context.subscriptions.push(asyncALineCompletionProvider, generateAsyncALineSnippetCommand);

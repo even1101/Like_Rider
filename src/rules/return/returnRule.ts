@@ -2,9 +2,9 @@ import * as vscode from 'vscode';
 import { generateReturnSnippetCommand } from '../../Commands/return/returnCommand';
 
 export function initializeReturnRule(context: vscode.ExtensionContext) {
-	console.log('初始化 .return 規則');
+	console.log('Initialize .return rule');
 
-	// 註冊當輸入 .return 時的建議
+	// Register suggestions when typing .return
 	const returnCompletionProvider = vscode.languages.registerCompletionItemProvider(
 		{ language: 'csharp' },
 		{
@@ -12,17 +12,17 @@ export function initializeReturnRule(context: vscode.ExtensionContext) {
 				const returnSnippet = new vscode.CompletionItem('return', vscode.CompletionItemKind.Snippet);
 				returnSnippet.command = {
 					command: 'extension.generateReturnSnippet',
-					title: '產生 return 語句',
+					title: 'Generate return statement',
 					arguments: [document, position]
 				};
-				returnSnippet.detail = '產生 return 語句';
-				returnSnippet.documentation = '快速產生 C# 的 return 語句';
+				returnSnippet.detail = 'Generate return statement';
+				returnSnippet.documentation = 'Quickly generate C# return statement';
 				return [returnSnippet];
 			}
 		},
 		'.return'
 	);
 
-	// 註冊命令來處理程式碼產生邏輯
+	// Register command to handle code generation logic
 	context.subscriptions.push(returnCompletionProvider, generateReturnSnippetCommand);
 }

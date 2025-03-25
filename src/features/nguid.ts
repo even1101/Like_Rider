@@ -19,7 +19,7 @@ export async function registerNGUID(text: string, editor: vscode.TextEditor): Pr
 		return;
 	}
 
-	// 刪除 @nguid 關鍵字
+	// Delete @nguid keyword
 	const range = document.getWordRangeAtPosition(position, /@nguid/);
 	if (range) {
 		await editor.edit((editBuilder) => {
@@ -27,7 +27,7 @@ export async function registerNGUID(text: string, editor: vscode.TextEditor): Pr
 		});
 	}
 
-	// 根據選擇生成對應的 GUID
+	// Generate corresponding GUID based on selection
 	const guid = selection.label.includes('skip') ? uuidv4().replace(/-/g, '') : uuidv4();
 	await editor.edit((editBuilder) => {
 		editBuilder.insert(position, guid);

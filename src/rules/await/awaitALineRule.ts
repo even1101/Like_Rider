@@ -2,24 +2,23 @@ import * as vscode from 'vscode';
 import { generateAwaitALineSnippetCommand } from '../../Commands/await/awaitALineCommand';
 
 export function initializeAwaitALineRule(context: vscode.ExtensionContext) {
-	console.log('初始化 .awaitALine 規則');
-
+	// Register suggestions when typing .awaitA
 	const awaitALineCompletionProvider = vscode.languages.registerCompletionItemProvider(
 		{ language: 'csharp' },
 		{
 			provideCompletionItems(document, position) {
-				const awaitALineSnippet = new vscode.CompletionItem('awaitALine', vscode.CompletionItemKind.Snippet);
+				const awaitALineSnippet = new vscode.CompletionItem('awaitA', vscode.CompletionItemKind.Snippet);
 				awaitALineSnippet.command = {
 					command: 'extension.generateAwaitALineSnippet',
-					title: '產生 awaitALine 方法',
+					title: 'Generate awaitA method',
 					arguments: [document, position]
 				};
-				awaitALineSnippet.detail = '產生 awaitALine 方法';
-				awaitALineSnippet.documentation = '快速產生 C# 的 awaitALine 方法';
+				awaitALineSnippet.detail = 'Generate awaitA method';
+				awaitALineSnippet.documentation = 'Quickly generate C# awaitA method';
 				return [awaitALineSnippet];
 			}
 		},
-		'.awaitALine'
+		'.awaitA'
 	);
 
 	context.subscriptions.push(awaitALineCompletionProvider, generateAwaitALineSnippetCommand);

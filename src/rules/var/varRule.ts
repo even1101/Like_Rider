@@ -2,9 +2,9 @@ import * as vscode from 'vscode';
 import { generateVarSnippetCommand } from '../../Commands/var/varCommand';
 
 export function initializeVarRule(context: vscode.ExtensionContext) {
-	console.log('初始化 .var 規則');
+	console.log('Initialize .var rule');
 
-	// 註冊當輸入 .var 時的建議
+	// Register suggestions when typing .var
 	const varCompletionProvider = vscode.languages.registerCompletionItemProvider(
 		{ language: 'csharp' },
 		{
@@ -12,11 +12,11 @@ export function initializeVarRule(context: vscode.ExtensionContext) {
 				const varSnippet = new vscode.CompletionItem('var', vscode.CompletionItemKind.Snippet);
 				varSnippet.command = {
 					command: 'extension.generateVarSnippet',
-					title: '產生 var 語句',
+					title: 'Generate var statement',
 					arguments: [document, position]
 				};
-				varSnippet.detail = '產生 var 語句';
-				varSnippet.documentation = '快速產生 C# 的 var 語句';
+				varSnippet.detail = 'Generate var statement';
+				varSnippet.documentation = 'Quickly generate C# var statement';
 				return [varSnippet];
 			}
 		},

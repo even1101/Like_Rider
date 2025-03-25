@@ -30,7 +30,7 @@ export async function registerNDate(text: string, editor: vscode.TextEditor): Pr
 		return;
 	}
 
-	// 刪除 @ndate 關鍵字
+	// Delete @ndate keyword
 	const range = document.getWordRangeAtPosition(position, /@ndate/);
 	if (range) {
 		await editor.edit((editBuilder) => {
@@ -38,7 +38,7 @@ export async function registerNDate(text: string, editor: vscode.TextEditor): Pr
 		});
 	}
 
-	// 根據選擇生成對應的 Date 和 DateTime 格式
+	// Generate corresponding Date and DateTime format based on selection
 	let generatedValue: string;
 	const now = new Date();
 
