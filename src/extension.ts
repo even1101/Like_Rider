@@ -14,13 +14,12 @@ import { initializeIfALineRule } from './rules/if/ifALineRule';
 import { initializeTaskALineRule } from './rules/task/taskALineRule';
 import { initializeAsyncALineRule } from './rules/async/asyncALineRule';
 // Quick Tools
-
+import { registerNGUID } from './features/nguid';
+import { registerNDate } from './features/ndate';
 
 export function activate(context: vscode.ExtensionContext) {
 	
 	vscode.workspace.textDocuments.forEach((document) => {
-		
-		
 		if (document.languageId !== 'csharp') {
 			return;
 		}
@@ -41,6 +40,18 @@ export function activate(context: vscode.ExtensionContext) {
 		initializeTaskALineRule(context);
 
 		vscode.window.showInformationMessage('Like Rider Initialize success');
+	});
+
+	vscode.workspace.onDidChangeTextDocument(async (event) => {
+		const editor = vscode.window.activeTextEditor;
+		if (!editor) { return; }
+
+		const document = editor.document;
+		const text = document.getText();
+
+		await registerNGUID(text, editor);
+		await registerNDate(text, editor);
+		
 	});
 
 }
