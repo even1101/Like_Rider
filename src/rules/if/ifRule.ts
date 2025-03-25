@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { generateIfSnippetCommand } from '../Commands/ifCommand';
+import { generateIfSnippetCommand } from '../../Commands/if/ifCommand';
 
 export function initializeIfRule(context: vscode.ExtensionContext) {
 	console.log('初始化 .if 規則');

@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { generateVarSnippetCommand } from '../Commands/varCommand';
+import { generateVarSnippetCommand } from '../../Commands/var/varCommand';
 
 export function initializeVarRule(context: vscode.ExtensionContext) {
 	console.log('初始化 .var 規則');

@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { generateAwaitSnippetCommand } from '../Commands/awaitCommand';
+import { generateAwaitSnippetCommand } from '../../Commands/await/awaitCommand';
 
 export function initializeAwaitRule(context: vscode.ExtensionContext) {
 	console.log('初始化 .await 規則');

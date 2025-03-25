@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { generateReturnSnippetCommand } from '../Commands/returnCommand';
+import { generateReturnSnippetCommand } from '../../Commands/return/returnCommand';
 
 export function initializeReturnRule(context: vscode.ExtensionContext) {
 	console.log('初始化 .return 規則');
