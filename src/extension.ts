@@ -16,6 +16,7 @@ import { initializeIfALineRule } from './rules/if/ifALineRule';
 // Quick Tools
 import { registerNGUID } from './features/nguid';
 import { registerNDate } from './features/ndate';
+import { registerNewFile, createNewFile } from './features/newFile';
 
 export function activate(context: vscode.ExtensionContext) {
 	
@@ -23,7 +24,7 @@ export function activate(context: vscode.ExtensionContext) {
 		if (document.languageId !== 'csharp') {
 			return;
 		}
-
+		
 		// Not yet implemented command
 		// initializeVarRule(context);
 		// initializeReturnRule(context);
@@ -51,8 +52,15 @@ export function activate(context: vscode.ExtensionContext) {
 
 		await registerNGUID(text, editor);
 		await registerNDate(text, editor);
+		await registerNewFile(text, editor);
 		
 	});
+
+	const newTemplate = vscode.commands.registerCommand('Like Rider New Template', async () => {
+		await createNewFile();
+	});
+
+	context.subscriptions.push(newTemplate);
 
 }
 

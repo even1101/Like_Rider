@@ -15,8 +15,10 @@ Like Rider 是一個專為 C# 開發者設計的 Visual Studio Code 擴展，提
   - `.returnA`：生成單行 `return` 語句。
 
 - **快捷工具**
+  - `@newC#`：[新功能] 快速產生C# 樣板。
   - `@nguid`：生成 GUID（可選擇是否包含連字符）。
   - `@ndate`：生成日期或時間戳（多種格式可選）。
+  
 
 ### 尚未實作功能
 
@@ -50,12 +52,14 @@ Like Rider 是一個專為 C# 開發者設計的 Visual Studio Code 擴展，提
 
 ### 快捷工具
 
-1. 使用 `@nguid` 關鍵字生成 GUID：
+1. 使用 `@newC#` 關鍵字可以快速建立C#樣板 或是 使用F1 or ctrl + p 輸入 Like Rider New Template
+
+2. 使用 `@nguid` 關鍵字生成 GUID：
    - 範例：`@nguid` → 選擇格式 → `123e4567-e89b-12d3-a456-426614174000`。
 
-2. 使用 `@ndate` 關鍵字生成日期或時間戳：
+3. 使用 `@ndate` 關鍵字生成日期或時間戳：
    - 範例：`@ndate` → 選擇格式 → `2023-12-31`。
-
+   
 ## 開發與貢獻
 
 歡迎對本專案進行貢獻！請遵循以下步驟：

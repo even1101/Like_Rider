@@ -15,6 +15,7 @@ Like Rider is a Visual Studio Code extension designed for C# developers, providi
   - `.returnA`: Generates a single-line `return` statement.
 
 - **Quick Tools**
+  - `@newC#`: [Feature] Quickly generate C# code templates.
   - `@nguid`: Generates a GUID (with or without dashes).
   - `@ndate`: Generates a date or timestamp in various formats.
 
