@@ -7,7 +7,7 @@ export class VarSnipeetHandler extends BaseSnippetHandler {
         document: vscode.TextDocument,
         position: vscode.Position
     ) {
-        super(document, position, ".", "var");
+        super(document, ".", "var");
     }
     GetSnippetString(expressionText: string): string {
         return `var \${1:myVar} = ${expressionText};\${0}`;

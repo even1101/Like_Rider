@@ -7,7 +7,7 @@ export class RetrunSnipeetHandler extends BaseSnippetHandler {
         document: vscode.TextDocument,
         position: vscode.Position
     ) {
-        super(document, position, ".", "return");
+        super(document, ".", "return");
     }
     GetSnippetString(expressionText: string): string {
         return `return ${expressionText};`;

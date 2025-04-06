@@ -1,4 +1,5 @@
 # Like Rider
+> 後綴補全
 
 [![en](https://img.shields.io/badge/lang-en-red.svg)](README.md)  
 [![zh-tw](https://img.shields.io/badge/lang-zh--tw-blue.svg)](README.zh-tw.md)
@@ -13,6 +14,7 @@ Like Rider 是一個專為 C# 開發者設計的 Visual Studio Code 擴展，提
   - `.ifA`：生成單行 `if` 條件語句。
   - `.varA`：生成單行變數聲明。
   - `.returnA`：生成單行 `return` 語句。
+  - `.cwA`: 生成單行 `Console.WriteLine("");` 語句。
   - `.var`：生成變數聲明。
   - `.return`：生成多行 `return` 語句。 
 - **快捷工具**

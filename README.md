@@ -1,4 +1,5 @@
-# Like Rider
+# Like Rider 
+> Postfix Completion
 
 [![en](https://img.shields.io/badge/lang-en-red.svg)](README.md)  
 [![zh-tw](https://img.shields.io/badge/lang-zh--tw-blue.svg)](README.zh-tw.md)
@@ -13,6 +14,7 @@ Like Rider is a Visual Studio Code extension designed for C# developers, providi
   - `.ifA`: Generates a single-line `if` conditional block.
   - `.varA`: Generates a single-line variable declaration.
   - `.returnA`: Generates a single-line `return` statement.
+  - `.cwA`: Generates a single-line `Console.WriteLine("");` statement.
   - `.var`: Generate a variable declaration.
   - `.return`: Generate a multi-line `return` statement.
 - **Quick Tools**

@@ -13,6 +13,7 @@ import { initializeReturnALineRule } from './rules/return/returnALineRule';
 import { initializeIfALineRule } from './rules/if/ifALineRule';
 // import { initializeTaskALineRule } from './rules/task/taskALineRule';
 // import { initializeAsyncALineRule } from './rules/async/asyncALineRule';
+import { initializeConsoleWrieLineALineRule } from './rules/console/consoleWriteLineALineRule'
 // Quick Tools
 import { registerNGUID } from './features/nguid';
 import { registerNDate } from './features/ndate';
@@ -35,9 +36,11 @@ export function activate(context: vscode.ExtensionContext) {
 
 		initializeVarRule(context);
 		initializeReturnRule(context);
+		
 		initializeVarALineRule(context);
 		initializeReturnALineRule(context);
 		initializeIfALineRule(context);
+		initializeConsoleWrieLineALineRule(context);
 		
 		vscode.window.showInformationMessage('Like Rider Initialize success');
 	});

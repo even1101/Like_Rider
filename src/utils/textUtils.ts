@@ -78,17 +78,17 @@ export const removeFirstOccurrenceOnCurrentLineAsync = async (
 
 
 
-export const removeTriggerKeyWord = async (document: vscode.TextDocument, position: vscode.Position, editor: vscode.TextEditor, triggerKeyWord: string): Promise<string> => {
+export const removeTextAsync = async (document: vscode.TextDocument, position: vscode.Position, editor: vscode.TextEditor, text: string): Promise<string> => {
   
   const line = document.lineAt(position.line);
   let lineText = line.text;
   
-  if (lineText.includes(triggerKeyWord)) {
-    const varIndex = lineText.indexOf(triggerKeyWord);
+  if (lineText.includes(text)) {
+    const textIndex = lineText.indexOf(text);
         
     const range = new vscode.Range(
-      new vscode.Position(line.lineNumber, varIndex),
-      new vscode.Position(line.lineNumber, varIndex + triggerKeyWord.length - 1)
+      new vscode.Position(line.lineNumber, textIndex),
+      new vscode.Position(line.lineNumber, textIndex + text.length - 1)
     );
     await editor.edit(editBuilder => editBuilder.delete(range));
     lineText = document.lineAt(position.line).text;
@@ -148,3 +148,36 @@ export const getSingleLineRepresentation = (text: string, maxLength: number = 40
   }
   return singleLine.substring(0, maxLength - 3) + '...';
 };
+/** 
+ * 從指定文件的某一行中，擷取從指定位置開始的非空白字元起點及其後的文字內容。
+ *
+ * @param document - VSCode 的 TextDocument 物件。
+ * @param line - 要處理的行數（從 0 開始）。
+ * @param startChar - 起始字元位置。
+ * @param endChar - 結束字元位置（非包含）。
+ * @returns 回傳一個物件，包含實際開始索引 startIdx 和擷取的文字 text。
+ */
+export function extractMeaningfulText(
+  document: vscode.TextDocument,
+  line: number,
+  startChar: number,
+  endChar: number
+): { startIdx: number; text: string } {
+  const lineText = document.lineAt(line).text;
+  const lineLength = lineText.length;
+
+  // 限制起始與結束範圍在合法的索引範圍內
+  const start = Math.max(0, Math.min(startChar, lineLength));
+  const end = Math.max(start, Math.min(endChar, lineLength));
+
+  // 第一步：從 start 開始尋找第一個非空白和非 tab 的字元位置
+  let startIdx = start;
+  while (startIdx < end && (lineText[startIdx] === ' ' || lineText[startIdx] === '\t')) {
+    startIdx++;
+  }
+
+  // 第二步：從 startIdx 開始擷取到 end 的文字
+  const text = lineText.substring(startIdx, end);
+
+  return { startIdx, text };
+}

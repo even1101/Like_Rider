@@ -5,7 +5,6 @@ import { removeFirstOccurrenceOnCurrentLineAsync } from '../utils/textUtils';
 export abstract class BaseSnippetHandler {
 
     private readonly _document: vscode.TextDocument;
-    private readonly _position: vscode.Position;
     private readonly _insertedWord: string;
     private readonly _triggerKeyWord: string;
 
@@ -13,12 +12,10 @@ export abstract class BaseSnippetHandler {
 
     constructor(
         document: vscode.TextDocument,
-        position: vscode.Position,
         triggerChar: string,
         insertedWord: string
     ) {
         this._document = document;
-        this._position = position;
         this._insertedWord = insertedWord;
         this._triggerKeyWord = triggerChar + insertedWord;
     }
@@ -52,6 +49,7 @@ export abstract class BaseSnippetHandler {
         // 插入代碼片段
         await this.AddCodeSnippetAsync(editor, replacementRange, expressionText);
     }
+    
     private ValidTriggerCharPosition(
         triggerCharPosition: vscode.Position | undefined
     ): boolean { 
@@ -59,6 +57,7 @@ export abstract class BaseSnippetHandler {
         console.log(`假設觸發有效。計算原始觸發字符'.'位置：行 ${triggerCharPosition.line}, 字元 ${triggerCharPosition.character}`);
         return true;
     }
+
     private ValidExpressionRange(
         expressionRange: vscode.Range | undefined
     ): boolean { 
