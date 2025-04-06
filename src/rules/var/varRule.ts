@@ -2,8 +2,6 @@ import * as vscode from 'vscode';
 import { generateVarSnippetCommand } from '../../Commands/var/varCommand';
 
 export function initializeVarRule(context: vscode.ExtensionContext) {
-	console.log('Initialize .var rule');
-
 	// Register suggestions when typing .var
 	const varCompletionProvider = vscode.languages.registerCompletionItemProvider(
 		{ language: 'csharp' },

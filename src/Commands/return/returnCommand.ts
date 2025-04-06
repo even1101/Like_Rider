@@ -1,8 +1,7 @@
 import * as vscode from 'vscode';
+import { RetrunSnipeetHandler } from '../../handler/ReturnSnippetHandler';
 
-export const generateReturnSnippetCommand = vscode.commands.registerCommand('extension.generateReturnSnippet', (document, position) => {
-	const editor = vscode.window.activeTextEditor;
-	if (editor) {
-		// ...existing code...
-	}
+export const generateReturnSnippetCommand = vscode.commands.registerCommand('extension.generateReturnSnippet', async (document, position) => {
+	const handler = new RetrunSnipeetHandler(document, position);
+	await handler.TriggerAsync();
 });

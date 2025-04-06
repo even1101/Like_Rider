@@ -8,8 +8,8 @@ export async function registerNewFile(text: string, editor: vscode.TextEditor): 
 
     editor.edit(editBuilder => {
         const fullRange = new vscode.Range(
-            document.positionAt(text.indexOf('newC#')),
-            document.positionAt(text.indexOf('newC#') + 'newC#'.length)
+            document.positionAt(text.indexOf('@newC#')),
+            document.positionAt(text.indexOf('@newC#') + '@newC#'.length)
         );
         editBuilder.delete(fullRange);
     });

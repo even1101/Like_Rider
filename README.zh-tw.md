@@ -13,7 +13,8 @@ Like Rider 是一個專為 C# 開發者設計的 Visual Studio Code 擴展，提
   - `.ifA`：生成單行 `if` 條件語句。
   - `.varA`：生成單行變數聲明。
   - `.returnA`：生成單行 `return` 語句。
-
+  - `.var`：生成變數聲明。
+  - `.return`：生成多行 `return` 語句。 
 - **快捷工具**
   - `@newC#`：[新功能] 快速產生C# 樣板。
   - `@nguid`：生成 GUID（可選擇是否包含連字符）。
@@ -22,10 +23,8 @@ Like Rider 是一個專為 C# 開發者設計的 Visual Studio Code 擴展，提
 
 ### 尚未實作功能
 
-- `.var`：預期生成變數聲明。
 - `.await`：預期生成非同步 `await` 語句。
 - `.if`：預期生成多行 `if` 條件語句區塊。
-- `.return`：預期生成多行 `return` 語句。
 - `.task`：預期生成 Task 方法。
 - `.async`：預期生成 Async 方法。
 - `.awaitA`：預期生成單行 `await` 語句。
@@ -46,8 +45,8 @@ Like Rider 是一個專為 C# 開發者設計的 Visual Studio Code 擴展，提
 1. 在 C# 檔案中輸入以下關鍵字觸發補全：
    - `.var`、`.await`、`.if`、`.return`、`.varA`、`.ifA`、`.returnA`。
 
-2. 範例：
-   - 輸入 `.varA` 會建議補全 `var myVar = ...`。
+2. 範例(都是在程式碼結尾輸入)：
+   - 輸入 `new List<int> {1,2,3}.varA` 會建議補全 `var myVar = new List<int> {1,2,3}`。
    - 輸入 `.ifA` 會建議補全單行 `if` 條件語句。
 
 ### 快捷工具
@@ -74,12 +73,6 @@ Like Rider 是一個專為 C# 開發者設計的 Visual Studio Code 擴展，提
    npm run watch
    ```
 4. 提交 Pull Request。
-
-## 已知問題
-
-- **尚未實作的功能**：
-  - `.task`、`.async`、`.taskA`、`.asyncA`。
-  - `@nguid` 和 `@ndate` 的進階自訂選項。
 
 - 如果您發現任何問題，請提交 Issue。
 

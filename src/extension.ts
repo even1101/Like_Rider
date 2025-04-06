@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 // back to start
-// import { initializeVarRule } from './rules/var/varRule';
-// import { initializeReturnRule } from './rules/return/returnRule';
+import { initializeVarRule } from './rules/var/varRule';
+import { initializeReturnRule } from './rules/return/returnRule';
 // import { initializeAwaitRule } from './rules/await/awaitRule';
 // import { initializeIfRule } from './rules/if/ifRule';
 // import { initializeTaskRule } from './rules/task/taskRule';
@@ -19,27 +19,26 @@ import { registerNDate } from './features/ndate';
 import { registerNewFile, createNewFile } from './features/newFile';
 
 export function activate(context: vscode.ExtensionContext) {
-	
+
 	vscode.workspace.textDocuments.forEach((document) => {
 		if (document.languageId !== 'csharp') {
 			return;
 		}
-		
 		// Not yet implemented command
-		// initializeVarRule(context);
-		// initializeReturnRule(context);
 		// initializeAwaitRule(context);
 		// initializeIfRule(context);
 		// initializeAsyncRule(context);
 		// initializeTaskRule(context);
-
-		initializeVarALineRule(context);
-		initializeReturnALineRule(context);
 		// initializeAwaitALineRule(context);
-		initializeIfALineRule(context);
 		// initializeAsyncALineRule(context);
 		// initializeTaskALineRule(context);
 
+		initializeVarRule(context);
+		initializeReturnRule(context);
+		initializeVarALineRule(context);
+		initializeReturnALineRule(context);
+		initializeIfALineRule(context);
+		
 		vscode.window.showInformationMessage('Like Rider Initialize success');
 	});
 
@@ -53,7 +52,6 @@ export function activate(context: vscode.ExtensionContext) {
 		await registerNGUID(text, editor);
 		await registerNDate(text, editor);
 		await registerNewFile(text, editor);
-		
 	});
 
 	const newTemplate = vscode.commands.registerCommand('Like Rider New Template', async () => {
@@ -64,4 +62,4 @@ export function activate(context: vscode.ExtensionContext) {
 
 }
 
-export function deactivate() {}
+export function deactivate() { }

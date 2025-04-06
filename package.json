@@ -2,7 +2,7 @@
   "name": "like-rider",
   "displayName": "Like Rider",
   "description": "Smart auto-completion for `var`, `await`, `if`, and `return` in C#.",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "publisher": "like-rider",
 
   "engines": {
@@ -12,8 +12,7 @@
     "Other"
   ],
   "activationEvents": [
-    "onLanguage:csharp",
-    "onCommand:Like Rider New Template"
+    "onLanguage:csharp"
   ],
   "contributes": {
     "languages": [

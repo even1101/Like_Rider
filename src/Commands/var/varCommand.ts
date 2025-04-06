@@ -1,8 +1,9 @@
 import * as vscode from 'vscode';
+import { VarSnipeetHandler } from "../../handler/VarSnipeetHandler";
 
-export const generateVarSnippetCommand = vscode.commands.registerCommand('extension.generateVarSnippet', (document, position) => {
-	const editor = vscode.window.activeTextEditor;
-	if (editor) {
-		// ...existing code...
-	}
+export const generateVarSnippetCommand = vscode.commands.registerCommand(
+  'extension.generateVarSnippet',
+  async (document: vscode.TextDocument, position: vscode.Position) => {
+    const handler = new VarSnipeetHandler(document, position);
+    await handler.TriggerAsync();
 });
