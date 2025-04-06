@@ -2,7 +2,7 @@
   "name": "like-rider",
   "displayName": "Like Rider",
   "description": "Smart auto-completion for `var`, `await`, `if`, and `return` in C#.",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "publisher": "like-rider",
   "icon": "media/Like_Rider_Gemini_Generated_Image_p5bf4up5bf4up5bf.jpeg",
   "engines": {
