@@ -24,13 +24,22 @@ export async function createNewFile() {
 
     const targetPath = await getTargetFolder(workspacePath);
     if (!targetPath) { return; }
-    ensureDirectoryExists(targetPath);
+    // ensureDirectoryExists(targetPath);
 
 
-    const fileName = await getFileName(fileType);
-    if (!fileName) { return; }
+    // 取得檔案資訊（檔名與資料夾路徑）
+    const fileInfo = await getFileName(fileType);
+    if (!fileInfo) { return; }
 
-    const filePath = path.join(targetPath, fileName);
+    const { fileName, folderPath } = fileInfo;
+
+    // 確定最終資料夾路徑
+    const finalFolderPath = folderPath ? path.join(targetPath, folderPath) : targetPath;
+
+    // 確保資料夾存在
+    ensureDirectoryExists(finalFolderPath);
+
+    const filePath = path.join(finalFolderPath, fileName);
     if (fs.existsSync(filePath)) {
         vscode.window.showErrorMessage("File already exists!");
         return;
@@ -76,62 +85,10 @@ async function getSelectFileType(): Promise<string | undefined> {
     return fileTypeSelection?.label;
 }
 
-async function getFileName(fileType: string): Promise<string | undefined> {
-    let fileName = await vscode.window.showInputBox({ prompt: "Enter the file name (e.g., MyClass)" });
-    
-    switch (fileType) {
-        case 'class':
-        case 'record':
-        case 'enum':
-            fileName += '.cs';
-            break;
-        case 'interface':
-            fileName = `I${fileName}.cs`;
-            break;
-        case 'controller':
-            fileName += 'Controller.cs';
-            break;
-        case 'minimal controller':
-            fileName += 'ApiEndPoints.cs'; 
-            break;
-        case 'service class':
-            fileName += 'Service.cs';
-            break;
-        case 'service interface':
-            fileName = `I${fileName}Service.cs`;
-            break;
-        case 'repository class':
-            fileName += 'Repository.cs';
-            break;
-        case 'repository interface':
-            fileName = `I${fileName}Repository.cs`;
-            break; 
-        case 'struct':
-            fileName += 'Struct.cs';
-            break;
-        case 'Auto Mapper':
-            fileName = `${fileName}Profile.cs`;
-            break;
-        case 'Fluent Validation':
-            fileName += 'Validator.cs';
-            break;
-        case 'MediatR Handler':
-            fileName += 'Handler.cs';
-            break;
-        case 'MediatR Request':
-            fileName += 'Request.cs';
-            break;
-        case 'New Othe File':
-            break;
-    }
-    
-    return fileName;
-}
 
 async function getTargetFolder(workspacePath: string): Promise<string | undefined> {
-    const folders = fs.readdirSync(workspacePath).filter(name => 
-        fs.statSync(path.join(workspacePath, name)).isDirectory()
-    );
+    const excludedFolders = getExcludedFolders(); // 從設定檔抓取排除資料夾
+    const folders = getAllFolders(workspacePath, excludedFolders);
     folders.push("New folder from workspace path.");
 
     const selectedFolder = await vscode.window.showQuickPick(folders, { placeHolder: "Select a folder or create a new one" });
@@ -142,9 +99,28 @@ async function getTargetFolder(workspacePath: string): Promise<string | undefine
         return newFolderName ? path.join(workspacePath, newFolderName) : undefined;
     }
 
-    return path.join(workspacePath, selectedFolder);
+    return selectedFolder;
 }
 
+function getAllFolders(dir: string, excludedFolders: string[], folderList: string[] = []): string[] {
+    const entries = fs.readdirSync(dir, { withFileTypes: true });
+
+    for (const entry of entries) {
+        if (entry.isDirectory() && !excludedFolders.includes(entry.name)) {
+            const fullPath = path.join(dir, entry.name);
+            folderList.push(fullPath);
+            getAllFolders(fullPath, excludedFolders, folderList); // 遞迴處理子資料夾
+        }
+    }
+
+    return folderList;
+}
+
+function getExcludedFolders(): string[] {
+    const config = vscode.workspace.getConfiguration('likeRider'); // 假設設定檔名稱為 likeRider
+    const excludedFolders = config.get<string[]>('excludedFolders', ['.git', '.idea', 'bin', 'obj']); // 預設排除資料夾
+    return excludedFolders;
+}
 
 function ensureDirectoryExists(directoryPath: string) {
     if (!fs.existsSync(directoryPath)) {
@@ -152,6 +128,70 @@ function ensureDirectoryExists(directoryPath: string) {
     }
 }
 
+async function getFileName(fileType: string): Promise<{ fileName: string; folderPath: string } | undefined> {
+    let fileNameWithPath = await vscode.window.showInputBox({ prompt: "Enter the file name (e.g., MyClass or /A/B/MyClass)" });
+    if (!fileNameWithPath) {
+        return undefined;
+    }
+
+    // 分割路徑，取得檔名和資料夾路徑
+    const pathParts = fileNameWithPath.split('/');
+    const fileName = pathParts.pop() || ''; // 取得最後一部分作為檔名
+    const folderPath = pathParts.join('/'); // 剩下的部分作為資料夾路徑
+
+    // 根據檔案類型附加副檔名
+    let finalFileName = '';
+    switch (fileType) {
+        case 'class':
+        case 'record':
+        case 'enum':
+            finalFileName = `${fileName}.cs`;
+            break;
+        case 'interface':
+            finalFileName = `I${fileName}.cs`;
+            break;
+        case 'controller':
+            finalFileName = `${fileName}Controller.cs`;
+            break;
+        case 'minimal controller':
+            finalFileName = `${fileName}ApiEndPoints.cs`;
+            break;
+        case 'service class':
+            finalFileName = `${fileName}Service.cs`;
+            break;
+        case 'service interface':
+            finalFileName = `I${fileName}Service.cs`;
+            break;
+        case 'repository class':
+            finalFileName = `${fileName}Repository.cs`;
+            break;
+        case 'repository interface':
+            finalFileName = `I${fileName}Repository.cs`;
+            break;
+        case 'struct':
+            finalFileName = `${fileName}Struct.cs`;
+            break;
+        case 'Auto Mapper':
+            finalFileName = `${fileName}Profile.cs`;
+            break;
+        case 'Fluent Validation':
+            finalFileName = `${fileName}Validator.cs`;
+            break;
+        case 'MediatR Handler':
+            finalFileName = `${fileName}Handler.cs`;
+            break;
+        case 'MediatR Request':
+            finalFileName = `${fileName}Request.cs`;
+            break;
+        case 'New Othe File':
+            finalFileName = fileName; // 不附加副檔名
+            break;
+        default:
+            finalFileName = fileName;
+    }
+
+    return { fileName: finalFileName, folderPath };
+}
 
 function createFile(filePath: string, fileType: string): string {
     if (fileType === 'New Othe File') { 
