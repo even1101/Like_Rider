@@ -17,6 +17,8 @@ Like Rider is a Visual Studio Code extension designed for C# developers, providi
   - `.cwA`: Generates a single-line `Console.WriteLine("");` statement.
   - `.var`: Generate a variable declaration.
   - `.return`: Generate a multi-line `return` statement.
+  - `.foreach`: Generates a single-line `foreach` statement.
+  - `.for`: Generates a single-line `for` statement.
 - **Quick Tools**
   - `@newC#`: [Feature] Quickly generate C# code templates.
   - `@nguid`: Generates a GUID (with or without dashes).

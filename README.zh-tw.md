@@ -17,6 +17,8 @@ Like Rider 是一個專為 C# 開發者設計的 Visual Studio Code 擴展，提
   - `.cwA`: 生成單行 `Console.WriteLine("");` 語句。
   - `.var`：生成變數聲明。
   - `.return`：生成多行 `return` 語句。 
+  - `.foreach`：生成單行 `foreach` 語句。
+  - `.for`：生成單行 `for` 語句。
 - **快捷工具**
   - `@newC#`：[新功能] 快速產生C# 樣板。
   - `@nguid`：生成 GUID（可選擇是否包含連字符）。
